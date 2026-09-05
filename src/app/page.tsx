@@ -6,9 +6,10 @@ import TouristIdCard from "@/components/TouristIdCard";
 import SafetyResources from "@/components/SafetyResources";
 import AiAdvisor from "@/components/AiAdvisor";
 import IncidentForm from "@/components/IncidentForm";
-import { Shield, MapPin, QrCode, BookOpen, Bot, AlertOctagon } from "lucide-react";
 import SafetyAlerts from "@/components/SafetyAlerts";
 import TouristProfile from "@/components/TouristProfile";
+import EmergencyTools from "@/components/EmergencyTools"; // <-- NEW IMPORT
+import { Shield } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
@@ -22,22 +23,19 @@ export default function Home() {
           <span className="text-xl font-bold tracking-wider">AEGIS</span>
         </div>
         
-        <nav className="flex items-center gap-2 md:gap-4 text-sm font-medium">
+        <nav className="flex flex-wrap items-center gap-2 md:gap-4 text-sm font-medium">
           <button 
             onClick={() => setActiveTab("home")} 
             className={`px-3 py-1.5 rounded-lg transition-colors ${activeTab === "home" ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"}`}
           >
             Home
           </button>
-          
-          {/* NEW PROFILE BUTTON ADDED HERE */}
           <button 
             onClick={() => setActiveTab("profile")} 
             className={`px-3 py-1.5 rounded-lg transition-colors ${activeTab === "profile" ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"}`}
           >
             Profile
           </button>
-
           <button 
             onClick={() => setActiveTab("report")} 
             className={`px-3 py-1.5 rounded-lg transition-colors ${activeTab === "report" ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"}`}
@@ -67,26 +65,33 @@ export default function Home() {
 
       {/* Main Content Area Controlled by Navigation */}
       <main className="flex-1 max-w-5xl w-full mx-auto p-4 md:p-8">
+        
+        {/* HOME TAB */}
         {activeTab === "home" && (
           <div className="space-y-6">
             <SafetyMap />
+            
+            {/* NEW EMERGENCY TOOLS ADDED HERE */}
+            <EmergencyTools />
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <TouristIdCard />
               <SafetyResources />
             </div>
+            
             <AiAdvisor />
             <IncidentForm />
             <SafetyAlerts />
           </div>
         )}
 
-        {/* NEW PROFILE TAB DISPLAY */}
+        {/* OTHER TABS */}
         {activeTab === "profile" && <TouristProfile />}
-        
         {activeTab === "report" && <IncidentForm />}
         {activeTab === "ai" && <AiAdvisor />}
         {activeTab === "resources" && <SafetyResources />}
         {activeTab === "id" && <TouristIdCard />}
+        
       </main>
     </div>
   );
