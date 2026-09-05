@@ -10,8 +10,6 @@ import { Shield, MapPin, QrCode, BookOpen, Bot, AlertOctagon } from "lucide-reac
 import SafetyAlerts from "@/components/SafetyAlerts";
 import TouristProfile from "@/components/TouristProfile";
 
-
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
 
@@ -31,6 +29,15 @@ export default function Home() {
           >
             Home
           </button>
+          
+          {/* NEW PROFILE BUTTON ADDED HERE */}
+          <button 
+            onClick={() => setActiveTab("profile")} 
+            className={`px-3 py-1.5 rounded-lg transition-colors ${activeTab === "profile" ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"}`}
+          >
+            Profile
+          </button>
+
           <button 
             onClick={() => setActiveTab("report")} 
             className={`px-3 py-1.5 rounded-lg transition-colors ${activeTab === "report" ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"}`}
@@ -70,10 +77,12 @@ export default function Home() {
             <AiAdvisor />
             <IncidentForm />
             <SafetyAlerts />
-            <TouristProfile/>
           </div>
         )}
 
+        {/* NEW PROFILE TAB DISPLAY */}
+        {activeTab === "profile" && <TouristProfile />}
+        
         {activeTab === "report" && <IncidentForm />}
         {activeTab === "ai" && <AiAdvisor />}
         {activeTab === "resources" && <SafetyResources />}
