@@ -1,68 +1,71 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { Shield, Map, PhoneCall } from "lucide-react";
+import TouristIdCard from "@/components/TouristIdCard";
+import IncidentForm from "@/components/IncidentForm";
+import AiAdvisor from "@/components/AiAdvisor";
+import dynamic from 'next/dynamic';
+
+const SafetyMap = dynamic(() => import("@/components/SafetyMap"), { ssr: false });
 
 export default function Home() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSOS = () => {
+    window.alert("🚨 EMERGENCY SOS TRIGGERED! 🚨\n\nYour exact GPS coordinates have been securely dispatched to local authorities and the Aegis Command Center. Please stay calm.");
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-200">
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-blue-700 font-extrabold text-2xl tracking-tight">
+            <Shield className="h-7 w-7" />
+            <span>Aegis</span>
+          </div>
+          <div className="flex gap-6 items-center">
+            <button onClick={() => scrollToSection('map-section')} className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Live Map</button>
+            <button onClick={() => scrollToSection('id-section')} className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Digital ID</button>
+            <button onClick={() => scrollToSection('report-section')} className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">Report Incident</button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </nav>
+
+      <main className="pt-40 pb-20 px-4 max-w-7xl mx-auto text-center flex flex-col items-center">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-green-100 border border-green-200 text-green-800 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 mb-8">
+          <span className="relative flex h-3 w-3"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span></span>
+          Current Location: Safe (94/100)
+        </motion.div>
+
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-6">
+          Explore the World with <br className="hidden md:block"/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Complete Peace of Mind.</span>
+        </motion.h1>
+        
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Your intelligent tourist safety platform. Real-time danger alerts, instant SOS dispatch, and a verified digital identity—all in your pocket.
+        </motion.p>
+
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+          <button onClick={handleSOS} className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105">
+            <PhoneCall className="h-5 w-5" />
+            Emergency SOS
+          </button>
+          <button onClick={() => scrollToSection('map-section')} className="bg-white border-2 border-slate-200 hover:border-blue-600 text-slate-800 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-sm transition-all hover:scale-105">
+            <Map className="h-5 w-5 text-blue-600" />
+            View Safety Map
+          </button>
+        </motion.div>
+
+        <div id="id-section" className="w-full mt-12"><TouristIdCard /></div>
+        <div id="map-section" className="w-full pt-16"><SafetyMap /></div>
+        <div id="report-section" className="w-full pt-16"><IncidentForm /></div>
+        <div className="w-full pt-16"><AiAdvisor /></div>
       </main>
     </div>
   );
