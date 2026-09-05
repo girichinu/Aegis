@@ -8,6 +8,7 @@ import AiAdvisor from "@/components/AiAdvisor";
 import IncidentForm from "@/components/IncidentForm";
 import { Shield, MapPin, QrCode, BookOpen, Bot, AlertOctagon } from "lucide-react";
 import SafetyAlerts from "@/components/SafetyAlerts";
+import TouristProfile from "@/components/TouristProfile";
 
 
 
@@ -69,6 +70,7 @@ export default function Home() {
             <AiAdvisor />
             <IncidentForm />
             <SafetyAlerts />
+            <TouristProfile/>
           </div>
         )}
 
