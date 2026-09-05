@@ -1,4 +1,6 @@
 # AEGIS - Tourist Safety & Emergency Response Platform
+### 🚀 Live Demo
+Check out the live application here: [Aegis Live URL] (https://aegis-tau-sand.vercel.app/)
 
 A practical full-stack platform built for tourist safety, featuring digital identity verification, real-time safety mapping, risk alerts, incident reporting, an AI safety advisor, and an authority monitoring dashboard.
 
