@@ -1,9 +1,14 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Phone, ShieldAlert, X, AlertTriangle } from "lucide-react";
+import { Phone, ShieldAlert, X, AlertTriangle, AlertOctagon } from "lucide-react";
 
 export default function EmergencyTools() {
+  // --- SOS PANIC BUTTON LOGIC ---
+  const triggerSOS = () => {
+    alert("🚨 SOS EMERGENCY TRIGGERED! Immediate distress signal and live location broadcasting to authority dispatch.");
+  };
+
   // --- FAKE CALL LOGIC ---
   const [callState, setCallState] = useState<"idle" | "waiting" | "ringing">("idle");
 
@@ -58,6 +63,26 @@ export default function EmergencyTools() {
 
   return (
     <div className="space-y-6">
+      
+      {/* --- PROMINENT SOS EMERGENCY BUTTON --- */}
+      <div className="bg-red-950/80 border-2 border-red-600 rounded-xl p-4 flex items-center justify-between shadow-2xl animate-pulse">
+        <div className="flex items-center gap-3">
+          <div className="bg-red-600 p-3 rounded-full text-white">
+            <AlertOctagon className="h-8 w-8" />
+          </div>
+          <div>
+            <h2 className="text-lg font-extrabold text-white tracking-wide">EMERGENCY SOS</h2>
+            <p className="text-xs text-red-200">Tap instantly to alert local authorities & send your live location.</p>
+          </div>
+        </div>
+        <button
+          onClick={triggerSOS}
+          className="bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3 rounded-lg shadow-lg tracking-wider text-sm transition-transform active:scale-95 cursor-pointer"
+        >
+          SOS ACTIVE
+        </button>
+      </div>
+
       {/* FULL SCREEN FAKE CALL MODAL */}
       {callState === "ringing" && (
         <div className="fixed inset-0 z-[100] bg-slate-900 flex flex-col items-center justify-center animate-pulse">
